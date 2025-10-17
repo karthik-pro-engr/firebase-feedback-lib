@@ -24,6 +24,11 @@ android {
                 "proguard-rules.pro"
             )
         }
+        create("beta") {
+            // Start from release so beta is signed the same and uses release-like settings
+            initWith(getByName("debug"))
+            isMinifyEnabled=false
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -33,7 +38,15 @@ android {
         jvmTarget = "11"
     }
 }
+fun DependencyHandler.betaImplementation(dependencyNotation: Any) {
+    add("betaImplementation", dependencyNotation)
+}
 
 dependencies {
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
     implementation(libs.androidx.material.icons.extended)
+
+    implementation(libs.firebase.appdistribution.api.ktx)
+    betaImplementation(libs.firebase.appdistribution)
 }
