@@ -7,8 +7,25 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
+        maven {
+            url = uri("https://maven.pkg.github.com/karthik-pro-engr/build-logic")
+            credentials {
+                username =
+                    providers.gradleProperty("gpr.user").orNull ?: System.getenv("GITHUB_ACTOR")
+                password =
+                    providers.gradleProperty("gpr.token").orNull ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
         mavenCentral()
         gradlePluginPortal()
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "karthik.pro.engr.android.library") {
+                useModule("karthik.pro.engr:android-library-plugin:${requested.version}")
+            }
+
+        }
     }
 }
 dependencyResolutionManagement {
