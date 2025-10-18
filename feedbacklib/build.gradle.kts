@@ -2,13 +2,17 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.karthik.pro.engr.android.library)
+    alias(libs.plugins.kotlin.compose)
 
 }
 
 android {
     namespace = "com.karthik.pro.engr.feedbacklib"
     compileSdk = 36
-
+    buildFeatures { compose = true }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.6.0"  // MUST match in app & lib
+    }
     defaultConfig {
         minSdk = 28
 
@@ -26,7 +30,7 @@ android {
         }
         create("beta") {
             // Start from release so beta is signed the same and uses release-like settings
-            initWith(getByName("debug"))
+            initWith(getByName("release"))
             isMinifyEnabled=false
         }
     }

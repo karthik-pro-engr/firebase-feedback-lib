@@ -15,7 +15,7 @@ allVariantsPreview = "0.3.0-rc1"
 firebase = "5.1.1"
 firebaseBom = "33.2.0"
 materialIconsExtended = "1.7.8"
-kpe-android = "1.2.3"
+kpe-android = "1.3.0"
 appcompat = "1.7.1"
 material = "1.13.0"
 
