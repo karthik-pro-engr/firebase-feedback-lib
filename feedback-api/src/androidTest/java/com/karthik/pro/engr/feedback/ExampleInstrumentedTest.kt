@@ -1,4 +1,4 @@
-package com.karthik.pro.engr.feedbacklib
+package com.karthik.pro.engr.feedback
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

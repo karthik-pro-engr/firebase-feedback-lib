@@ -1,4 +1,4 @@
-package com.karthik.pro.engr.feedbacklib
+package com.karthik.pro.engr.feedback
 
 import org.junit.Test
 

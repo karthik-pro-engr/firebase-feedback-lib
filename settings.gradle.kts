@@ -38,3 +38,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "firebase-feedback-lib"
 include(":feedback-impl")
+include(":feedback-api")

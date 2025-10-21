@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.karthik.pro.engr.feedback"
+    namespace = "com.karthik.pro.engr.feedback.api"
     compileSdk = 36
     buildFeatures { compose = true }
     composeOptions {
@@ -42,16 +42,10 @@ android {
         jvmTarget = "11"
     }
 }
-fun DependencyHandler.betaImplementation(dependencyNotation: Any) {
-    add("betaImplementation", dependencyNotation)
-}
+
 
 dependencies {
-    implementation(project(":feedback-api"))
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.androidx.material.icons.extended)
-
-    implementation(libs.firebase.appdistribution.api.ktx)
-    implementation(libs.firebase.appdistribution)
 }

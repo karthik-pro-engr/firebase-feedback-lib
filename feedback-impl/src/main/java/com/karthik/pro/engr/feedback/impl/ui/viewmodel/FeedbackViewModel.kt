@@ -1,4 +1,4 @@
-package com.karthik.pro.engr.feedbacklib.ui.viewmodel
+package com.karthik.pro.engr.feedback.impl.ui.viewmodel
 
 import android.app.Activity
 import android.content.Context
@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.appdistribution.FirebaseAppDistribution
+import com.karthik.pro.engr.feedback.api.FeedbackSender
+import com.karthik.pro.engr.feedback.api.ui.viewmodel.FeedbackEvent
+import com.karthik.pro.engr.feedback.api.ui.viewmodel.FeedbackUiEffect
+import com.karthik.pro.engr.feedback.api.ui.viewmodel.FeedbackUiState
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -20,9 +23,8 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import kotlin.String
 
-class FeedbackViewModel : ViewModel() {
+class FeedbackViewModel(private val feedbackSender: FeedbackSender) : ViewModel() {
     private val _uiEffect = MutableSharedFlow<FeedbackUiEffect.LaunchEmail>(
         0,
         extraBufferCapacity = 1,
@@ -40,7 +42,7 @@ class FeedbackViewModel : ViewModel() {
         viewModelScope.launch {
             setSubmitting("Opening Feedback")
             try {
-                FirebaseAppDistribution.getInstance().startFeedback(feedbackMessage)
+                feedbackSender.startFeedback(feedbackMessage)
             } catch (t: Throwable) {
                 _uiEffect.emit(FeedbackUiEffect.LaunchEmail)
             } finally {
@@ -54,7 +56,7 @@ class FeedbackViewModel : ViewModel() {
     fun setSubmitting(submittingMessage: String) {
         _uiState.update {
             Log.d("FeedbackVM", "setSubmitting on vm@${System.identityHashCode(this)} -> $submittingMessage")
-            it.copy(feedBackState = submittingMessage)
+            it.copy(feedBackStateText = submittingMessage)
         }
 
     }
@@ -144,7 +146,7 @@ class FeedbackViewModel : ViewModel() {
         when (event) {
             is FeedbackEvent.SendFeedback -> {
                 setSubmitting("From SendFeedback Event")
-                startFeedback(event.message)
+                startFeedback(event.messageId)
             }
         }
 
