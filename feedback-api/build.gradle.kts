@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.github.karthik-pro-engr"
-version = "0.0.2-beta"
+version = "1.0.0-beta"
 
 android {
     namespace = "com.karthik.pro.engr.feedback.api"

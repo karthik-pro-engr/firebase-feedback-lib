@@ -8,7 +8,7 @@ plugins {
     id("org.jetbrains.dokka") version "2.1.0"
 }
 group = "io.github.karthik-pro-engr"
-version = "0.0.2-beta"
+version = "1.0.0-beta"
 
 android {
     namespace = "com.karthik.pro.engr.feedback.impl"
