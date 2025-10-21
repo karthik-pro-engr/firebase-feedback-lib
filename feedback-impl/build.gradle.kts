@@ -51,6 +51,6 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.androidx.material.icons.extended)
 
-    implementation(libs.firebase.appdistribution.api.ktx)
-    betaImplementation(libs.firebase.appdistribution)
+//    implementation(libs.firebase.appdistribution.api.ktx)
+    implementation(libs.firebase.appdistribution)
 }
